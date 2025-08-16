@@ -1,12 +1,371 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ffa官网</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: white;
+            padding: 0 5%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* 主要内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* 顶部图片区域 */
+        .hero {
+            position: relative;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 60px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero:hover .hero-image {
+            transform: scale(1.03);
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 40px;
+            color: white;
+        }
+        
+        .hero-overlay h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero-overlay p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            opacity: 0.9;
+        }
+        
+        /* 标题区域 */
+        .title-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 0 20px;
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+        
+        .title-divider {
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            border-radius: 10px;
+            margin: 30px auto;
+        }
+        
+        /* 简介区域 */
+        .intro-section {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff8a00, #e52e71);
+        }
+        
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .intro-content p {
+            margin-bottom: 25px;
+        }
+        
+        /* 底部图片区域 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+      margin-top: 80px;
+        }
+        
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            height: 350px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero {
+                height: 350px;
+            }
+            
+            .hero-overlay {
+                padding: 20px;
+            }
+            
+            .hero-overlay h2 {
+                font-size: 1.8rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .intro-section {
+                padding: 30px 20px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 5px;
+            }
+            
+            .hero {
+                height: 280px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
 <body>
-<nav>
-       <p>114514</p>
-       </nav>
-       <img src="https://raw.githubusercontent.com/fly-friend-association/Fly-friend-association.github.io/refs/heads/main/mmexport1754372313620.jpg" alt="1">
-       <36px>ffa简介<36px/>
-           <h1>FFA（Fly friend association）                 FFA，全称（Fly friend association）。于2023年于福建三明成立。是一个飞行爱好者（含铁路爱好者）的一个协会组织，属于全国性飞友组织，是为了全国飞友的共同话题而创建</h1>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <span>ffa</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fas fa-home"></i> 飞友拍机</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> 关于</a></li>
+                <li><a href="#"><i class="fas fa-concierge-bell"></i> 联系方式</a></li>
+                <li><a href="#"><i class="fas fa-images"></i> 黑榜</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> ？</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <div class="container">
+        <!-- 顶部图片 -->
+        <div class="hero">
+            <img src="https://raw.githubusercontent.com/fly-friend-association/Fly-friend-association.github.io/refs/heads/main/mmexport1754372313620.jpg" 
+                 alt="logo" class="hero-image">
+            <div class="hero-overlay">
+                <p>ffa logo</p>
+            </div>
+        </div>
+
+        <!-- 大标题区域 -->
+        <div class="title-section">
+            <h1 class="main-title">ffa官网</h1>
+            <div class="title-divider"></div>
+            <p style="max-width: 700px; margin: 0 auto; font-size: 1.3rem; color: #555;">
+                我们是专业的团队
+            </p>
+        </div>
+
+        <!-- 简介区域 -->
+        <div class="intro-section">
+            <div class="intro-content">
+                <p>FFA，全称（Fly friend association）。于2023年于福建成立。是一个飞行爱好者（含铁路爱好者）的一个协会组织
+群规：1 抵制飞马本子
+2 拒绝飞马进入
+3 进群表明你的飞友身份
+4 别骂入我求你了
+5 见到🇰🇵  /:sun 一定要举起双手并跳跃不然吃紫菜蛋花汤
+6 别刷屏不然你的身份会被我们挂到网站上
+7 8
+8 去官网Fly-friend-association.github.io看看
+9 1
+10 官方邮箱Fly-friend-association@outlook.com
+总群在这里
+[图片]</p>
+                
+                <p>我们这里还有飞友拍机</p>
+                
+                <p></p>
+            </div>
+        </div>
+
+        <!-- 底部图片区域 -->
+        <div class="image-gallery">
+            <div class="gallery-item">
+                <img src="" 
+                     alt="飞友拍机" class="gallery-image">
+            </div>
+            <div class="gallery-item">
+                <img src="https" 
+                     alt="飞友拍机" class="gallery-image">
+            </div>
+            <div class="gallery-item">
+                <img src="https" 
+                     alt="飞友拍机" class="gallery-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 由AC130设计</p>
+    </footer>
 </body>
 </html>
